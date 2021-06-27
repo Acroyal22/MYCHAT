@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ChatEngine } from "react-chat-engine";
 import { useHistory } from "react-router-dom";
 import { auth } from "./Firebase";
@@ -6,7 +6,7 @@ import { useAuth } from "./AuthContext";
 import axios from "axios";
 
 const Chat = () => {
-  const [loading, setLoading] = useState(true);
+  const [setLoading] = useState(true);
   const histroy = useHistory();
   const { user } = useAuth();
 
