@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ChatEngine } from "react-chat-engine";
 import { useHistory } from "react-router-dom";
 import { auth } from "./Firebase";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
+// import env from "dotenv";
+// env.config();
 
 const Chat = () => {
-  const [setLoading] = useState(true);
+  // const [, setLoading] = useState(true);
   const histroy = useHistory();
   const { user } = useAuth();
+
+  let { displayName, email } = user;
 
   const handleOnClick = async () => {
     await auth.signOut();
@@ -34,7 +38,7 @@ const Chat = () => {
         },
       })
       .then(() => {
-        setLoading(false);
+        // setLoading(false);
       })
       .catch(() => {
         let formdata = new FormData();
@@ -50,7 +54,9 @@ const Chat = () => {
                 "Private-Key": process.env.REACT_APP_CHAT_ENGINE_KEY,
               },
             })
-            .then(() => setLoading(false))
+            .then(() => {
+              // setLoading(false)
+            })
             .catch((error) => console.log(error));
         });
       });
@@ -64,11 +70,15 @@ const Chat = () => {
           Logout
         </div>
       </div>
-   
+      <div>{process.env.REACT_APP_CHAT_ENGINE_ID}</div>
+      <div>
+        email: {user.email} {user.displayName}
+      </div>
+      <div>uid: {user.uid}</div>
       <ChatEngine
         height="calc(100vh-66px)"
         projectID={process.env.REACT_APP_CHAT_ENGINE_ID}
-        userName={user.email}
+        userName={displayName || email}
         userSecret={user.uid}
       />
     </div>
