@@ -63,6 +63,7 @@ const Chat = () => {
   }, [user, histroy]);
 
   return (
+    <div className="container">
     <div className="chats-page">
       <div className="nav-bar">
         <div className="logo-tab">MyChat</div>
@@ -77,6 +78,7 @@ const Chat = () => {
         userName={displayName || email}
         userSecret={user.uid}
       />
+    </div>
     </div>
   );
 };
